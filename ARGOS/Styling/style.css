@@ -1,0 +1,592 @@
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* This prevents the sticky nav from covering the section title when you click a link */
+}
+
+/* Variables */
+:root {
+    --primary: #e67e22;
+    --emergency: #e74c3c;
+    --dark: #2c3e50;
+    --light: #f9f9f9;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: var(--dark);
+    line-height: 1.6;
+    background-color: var(--white);
+    scroll-behavior: smooth;
+}
+
+.container {
+    width: 95%;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+/* Navbar */
+.navbar {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.95); /* Slight transparency */
+    backdrop-filter: blur(10px); /* Glass effect */
+    position: fixed; /* Stays at the top */
+    top: 0;
+    width: 100%;
+    z-index: 2000;
+    transition: all 0.4s ease;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+}
+
+/* Navbar effect on scroll (Activated by JS) */
+.navbar.scrolled {
+    height: 70px;
+    background: #ffffff;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+}
+
+.logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: var(--dark);
+}
+
+.dot { color: var(--primary); }
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.nav-links li {
+    margin-left: 30px;
+    position: relative;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+/* Animated Underline Effect */
+.nav-links li a:not(.btn-nav-cta)::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--primary);
+    transition: width 0.3s ease;
+}
+
+.nav-links li a:hover:not(.btn-nav-cta)::after {
+    width: 100%;
+}
+
+.nav-links li a:hover {
+    color: var(--primary);
+}
+
+/* Login Link */
+.nav-login {
+    color: var(--dark);
+    margin-right: 10px;
+}
+
+/* Join Argos CTA Button */
+.btn-nav-cta {
+    background: var(--primary);
+    color: white !important;
+    padding: 12px 25px;
+    border-radius: 50px; /* Fully rounded */
+    font-weight: 700 !important;
+    box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
+    transition: 0.3s !important;
+}
+
+.btn-nav-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(230, 126, 34, 0.4);
+    background: #d35400 !important; /* Slightly darker orange */
+}
+
+/* Mobile Toggle */
+.menu-icon {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--dark);
+}
+
+
+.btn-main {
+    background: var(--primary);
+    color: white !important;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    background: url('https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1920') center/cover no-repeat;
+}
+
+.hero-overlay {
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto 30px;
+}
+
+.hero-btns a {
+    text-decoration: none;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-weight: bold;
+    margin: 10px;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.btn-emergency { background: var(--emergency); color: white; }
+.btn-outline { border: 2px solid white; color: white; }
+.btn-emergency:hover { transform: scale(1.05); }
+.btn-outline:hover { transform: scale(1.05); }
+
+/* Services Section */
+.services { padding: 80px 0; background: var(--light); }
+.section-header { text-align: center; margin-bottom: 50px; }
+.underline { width: 60px; height: 4px; background: var(--primary); margin: 10px auto; }
+
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.service-card {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.icon-box {
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    font-size: 30px;
+}
+
+.red { background: #ffebee; color: var(--emergency); }
+.blue { background: #e3f2fd; color: #2196f3; }
+.orange { background: #fff3e0; color: var(--primary); }
+.green { background: #e0ffe1; color: green; }
+
+/* Myth Section */
+.myth-section { padding: 80px 0; }
+.myth-content { display: flex; align-items: center; gap: 50px; flex-wrap: wrap; }
+.myth-text { flex: 1; min-width: 300px; }
+.myth-image { flex: 1; min-width: 300px; }
+.myth-image img { width: 100%; border-radius: 20px; box-shadow: 15px 15px 0 var(--primary); }
+
+/* Prog Section */
+.prog-section { padding: 80px 0; background-color: var(--light)}
+
+.prog-content {
+    position: relative;
+    margin-top: 50px;
+    display: flex; 
+    flex-direction: row;
+    align-items: center; 
+    justify-content: space-between;
+    
+}
+.prog-content::before {
+    position: absolute;
+    top: 35px; /* Half of 70px icon height to hit the center perfectly */
+    z-index: 1;
+    content: "";
+    background: linear-gradient(90deg, red, var(--primary),yellow ,green);
+    width: 99%;
+    height: 2px;
+}
+
+.prog-cards {
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+
+}
+
+.prog-cards h3 {
+    font-size: 1.1rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.prog-cards:hover{
+    transform: scale(1.1);
+}
+
+.prog-cards:hover .icon-box-prog {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.prog-text {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+    color: var(--primary);
+}
+
+.icon-box-prog {
+    background-color: var(--light); /* This covers the line behind the icon */
+    border: 2px solid #eee; /* Adds a nice subtle border */
+    text-align: center;
+    width: 70px;
+    height: 70px;
+    line-height: 66px; /* Adjust for the 2px border */
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    font-size: 25px;
+    transition: 0.3s;
+}
+
+/* Adoption Section */
+.adopt-section { padding: 50px 0; background-color: var(--white); }
+
+.pet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.pet-card {
+    background: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: 0.3s;
+    border: 1px solid #eee;
+}
+
+.pet-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.pet-image {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+
+.pet-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.pet-card:hover .pet-image img {
+    transform: scale(1.1);
+}
+
+/* Badges */
+.badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: white;
+}
+
+.badge.new { background: var(--emergency); }
+.badge.healthy { background: #2ecc71; }
+.badge.special { background: #f1c40f; }
+
+.pet-info { padding: 25px; text-align: center; }
+.pet-info h3 { font-family: 'Montserrat', sans-serif; margin-bottom: 5px; }
+.pet-info p { color: #777; margin-bottom: 20px; }
+
+.btn-view {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 700;
+    border: 2px solid var(--primary);
+    padding: 8px 20px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn-view:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.view-all { text-align: center; margin-top: 50px; }
+.btn-outline-dark {
+    text-decoration: none;
+    color: var(--dark);
+    border: 2px solid var(--dark);
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 700;
+    transition: 0.3s;
+}
+.btn-outline-dark:hover { background: var(--dark); color: white; }
+
+/* Stats Section */
+.stats-section {
+    background-color: var(--dark);
+    color: var(--white);
+    padding: 60px 0;
+    text-align: center;
+}
+.stats-grid {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.stat-item h2 {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 5px;
+}
+
+/* Happy Tails Styling */
+.stories-section {
+    padding: 30px 0;
+    background-color: var(--light); /* Light gray background to separate it from white sections */
+}
+
+.story-card {
+    display: flex;
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    max-width: 1000px;
+    margin: 40px auto; /* Centers the card */
+    align-items: center;
+}
+
+.story-image {
+    flex: 1;
+    height: 400px; /* Gives the image proper height */
+}
+
+.story-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Prevents stretching */
+}
+
+.story-content {
+    flex: 1.2;
+    padding: 50px;
+    position: relative;
+}
+
+.quote-icon {
+    font-size: 40px;
+    color: var(--primary);
+    opacity: 0.2;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
+.story-content h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: var(--dark);
+}
+
+.story-content p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.8;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.adopter {
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+
+/* Newsletter Form */
+.newsletter-section { padding: 80px 0; background: var(--light); text-align: center; }
+.newsletter-box { max-width: 600px; margin: 0 auto; }
+.newsletter-form {
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+.newsletter-form input {
+    padding: 12px 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 60%;
+}
+.form-msg { margin-top: 15px; font-weight: 600; }
+
+/* Footer */
+footer { background: var(--dark); color: white; padding: 40px 0; text-align: center; }
+.social-links { margin-top: 20px; }
+.social-links i { font-size: 24px; margin: 0 10px; color: #bdc3c7; cursor: pointer; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-links { display: none; } /* Add JS toggle later */
+    .hero h1 { font-size: 2.5rem; }
+}
+
+@media (max-width: 768px) {
+    .story-card {
+        flex-direction: column;
+    }
+    .story-image {
+        width: 100%;
+        height: 250px;
+    }
+}
+
+@media (max-width: 992px) {
+    .menu-icon { 
+        display: block; 
+        z-index: 2001; /* Ensure button is above the menu */
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 0;
+        left: -100%; /* Hidden off-screen */
+        flex-direction: column;
+        background: white;
+        width: 80%; /* Menu width on mobile */
+        height: 100vh;
+        text-align: center;
+        transition: 0.4s ease-in-out;
+        box-shadow: 10px 0 20px rgba(0,0,0,0.1);
+        padding: 100px 0;
+        display: flex; /* Override display:none if you had it */
+    }
+
+    /* THE MAGIC CLASS: This makes the menu appear */
+    .nav-links.active { 
+        left: 0; 
+    }
+
+    .nav-links li { 
+        margin: 20px 0; 
+        width: 100%;
+    }
+
+    .nav-links li a::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+.nav-links li {
+        margin: 15px 0; /* Vertical spacing between links */
+        width: 100%;
+        display: flex;
+        justify-content: center; /* Centers the link container */
+    }
+
+    .nav-links li a {
+        font-size: 1.2rem;
+        display: inline-block; /* Makes the link only as wide as the text */
+        position: relative;
+    }
+
+    /* Fixed Underline for Mobile */
+    .nav-links li a:not(.btn-nav-cta)::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 50%; /* Start from middle */
+        transform: translateX(-50%); /* Center it perfectly */
+        background-color: var(--primary);
+        transition: width 0.3s ease;
+    }
+
+    /* Underline grows from center on hover/click */
+    .nav-links li a:hover:not(.btn-nav-cta)::after {
+        width: 80%; /* Limits width so it doesn't touch the edges of the text */
+    }
+
+    /* Ensure the 'Join Argos' button doesn't have an underline */
+    .btn-nav-cta {
+        width: 200px; /* Give it a fixed width on mobile so it looks like a button */
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .nav-links li {
+        margin-left: 15px; /* Reduced from 30px */
+    }
+    .nav-links li a {
+        font-size: 0.85rem; /* Slightly smaller text */
+    }
+}
