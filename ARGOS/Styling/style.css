@@ -1,6 +1,6 @@
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 80px; /* This prevents the sticky nav from covering the section title when you click a link */
+    scroll-padding-top: 80px;
 }
 
 /* Variables */
@@ -37,9 +37,9 @@ body {
     height: 80px;
     display: flex;
     align-items: center;
-    background: rgba(255, 255, 255, 0.95); /* Slight transparency */
-    backdrop-filter: blur(10px); /* Glass effect */
-    position: fixed; /* Stays at the top */
+    background: rgba(255, 255, 255, 0.95); 
+    backdrop-filter: blur(10px); 
+    position: fixed;
     top: 0;
     width: 100%;
     z-index: 2000;
@@ -47,7 +47,6 @@ body {
     box-shadow: 0 2px 20px rgba(0,0,0,0.05);
 }
 
-/* Navbar effect on scroll (Activated by JS) */
 .navbar.scrolled {
     height: 70px;
     background: #ffffff;
@@ -91,7 +90,6 @@ body {
     transition: 0.3s;
 }
 
-/* Animated Underline Effect */
 .nav-links li a:not(.btn-nav-cta)::after {
     content: '';
     position: absolute;
@@ -117,7 +115,6 @@ body {
     margin-right: 10px;
 }
 
-/* Join Argos CTA Button */
 .btn-nav-cta {
     background: var(--primary);
     color: white !important;
@@ -246,7 +243,7 @@ body {
 }
 .prog-content::before {
     position: absolute;
-    top: 35px; /* Half of 70px icon height to hit the center perfectly */
+    top: 35px;
     z-index: 1;
     content: "";
     background: linear-gradient(90deg, red, var(--primary),yellow ,green);
@@ -285,12 +282,12 @@ body {
 }
 
 .icon-box-prog {
-    background-color: var(--light); /* This covers the line behind the icon */
-    border: 2px solid #eee; /* Adds a nice subtle border */
+    background-color: var(--light); 
+    border: 2px solid #eee;
     text-align: center;
     width: 70px;
     height: 70px;
-    line-height: 66px; /* Adjust for the 2px border */
+    line-height: 66px;
     border-radius: 50%;
     margin: 0 auto 20px;
     font-size: 25px;
@@ -407,7 +404,7 @@ body {
 /* Happy Tails Styling */
 .stories-section {
     padding: 30px 0;
-    background-color: var(--light); /* Light gray background to separate it from white sections */
+    background-color: var(--light);
 }
 
 .story-card {
@@ -417,19 +414,19 @@ body {
     overflow: hidden;
     box-shadow: 0 15px 35px rgba(0,0,0,0.1);
     max-width: 1000px;
-    margin: 40px auto; /* Centers the card */
+    margin: 40px auto;
     align-items: center;
 }
 
 .story-image {
     flex: 1;
-    height: 400px; /* Gives the image proper height */
+    height: 400px;
 }
 
 .story-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Prevents stretching */
+    object-fit: cover;
 }
 
 .story-content {
@@ -495,7 +492,7 @@ footer { background: var(--dark); color: white; padding: 40px 0; text-align: cen
 
 /* Responsive */
 @media (max-width: 768px) {
-    .nav-links { display: none; } /* Add JS toggle later */
+    .nav-links { display: none; }
     .hero h1 { font-size: 2.5rem; }
 }
 
@@ -512,25 +509,24 @@ footer { background: var(--dark); color: white; padding: 40px 0; text-align: cen
 @media (max-width: 992px) {
     .menu-icon { 
         display: block; 
-        z-index: 2001; /* Ensure button is above the menu */
+        z-index: 2001;
     }
     
     .nav-links {
         position: fixed;
         top: 0;
-        left: -100%; /* Hidden off-screen */
+        left: -100%;
         flex-direction: column;
         background: white;
-        width: 80%; /* Menu width on mobile */
+        width: 80%; 
         height: 100vh;
         text-align: center;
         transition: 0.4s ease-in-out;
         box-shadow: 10px 0 20px rgba(0,0,0,0.1);
         padding: 100px 0;
-        display: flex; /* Override display:none if you had it */
+        display: flex;
     }
 
-    /* THE MAGIC CLASS: This makes the menu appear */
     .nav-links.active { 
         left: 0; 
     }
@@ -545,15 +541,15 @@ footer { background: var(--dark); color: white; padding: 40px 0; text-align: cen
         transform: translateX(-50%);
     }
 .nav-links li {
-        margin: 15px 0; /* Vertical spacing between links */
+        margin: 15px 0;
         width: 100%;
         display: flex;
-        justify-content: center; /* Centers the link container */
+        justify-content: center; 
     }
 
     .nav-links li a {
         font-size: 1.2rem;
-        display: inline-block; /* Makes the link only as wide as the text */
+        display: inline-block; 
         position: relative;
     }
 
@@ -564,29 +560,27 @@ footer { background: var(--dark); color: white; padding: 40px 0; text-align: cen
         width: 0;
         height: 2px;
         bottom: -5px;
-        left: 50%; /* Start from middle */
-        transform: translateX(-50%); /* Center it perfectly */
+        left: 50%; 
+        transform: translateX(-50%); 
         background-color: var(--primary);
         transition: width 0.3s ease;
     }
 
-    /* Underline grows from center on hover/click */
     .nav-links li a:hover:not(.btn-nav-cta)::after {
-        width: 80%; /* Limits width so it doesn't touch the edges of the text */
+        width: 80%; 
     }
 
-    /* Ensure the 'Join Argos' button doesn't have an underline */
     .btn-nav-cta {
-        width: 200px; /* Give it a fixed width on mobile so it looks like a button */
+        width: 200px; 
         margin-top: 10px;
     }
 }
 
 @media (max-width: 1100px) {
     .nav-links li {
-        margin-left: 15px; /* Reduced from 30px */
+        margin-left: 15px; 
     }
     .nav-links li a {
-        font-size: 0.85rem; /* Slightly smaller text */
+        font-size: 0.85rem; 
     }
 }

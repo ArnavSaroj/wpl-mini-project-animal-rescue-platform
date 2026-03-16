@@ -1,7 +1,6 @@
 // Wait for the DOM to load
 document.addEventListener('DOMContentLoaded', () => {
     
-    // Select Elements
     const navbar = document.getElementById('navbar');
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
