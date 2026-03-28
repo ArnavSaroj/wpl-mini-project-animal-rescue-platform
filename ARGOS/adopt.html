@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ARGOS | Adopt a Friend</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Reuse main styles and icons -->
+    <link rel="stylesheet" href="./Styling/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Extra styles for this page -->
+    <style>
+        .adopt-page-header {
+            padding: 120px 0 40px;
+            text-align: center;
+        }
+        .adopt-page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .adopt-page-header p {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .pet-details {
+            display: none;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        .pet-details ul {
+            padding-left: 20px;
+        }
+        .pet-details.open {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">ARGOS<span class="dot">.</span></a>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#about">Our Story</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="adopt.html" class="nav-login">Adopt</a></li>
+                <li><a href="index.html#stats">Impact</a></li>
+                <li><a href="index.html#stories">Stories</a></li>
+                <li><a href="login.php" class="nav-login">Login</a></li>
+                <li><a href="register.php" class="btn-nav-cta">Join Argos</a></li>
+            </ul>
+
+            <div class="menu-icon" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="adopt-page-header">
+            <div class="container">
+                <h1>Find Your New Best Friend</h1>
+                <p>Click on "View Profile" to see more information about each animal. Images can be added later.</p>
+            </div>
+        </section>
+
+        <section class="adopt-section">
+            <div class="container">
+                <!-- JS will dynamically inject pet cards into this grid -->
+                <div class="pet-grid"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ARGOS Animal Rescue Platform. Compassion via Technology.</p>
+            <div class="social-links">
+                <a href="#"><i class="fa-brands fa-facebook" style="color: rgb(31, 120, 242);"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram" style="color: rgb(177, 151, 252);"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter" style="color: rgb(116, 192, 252);"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shared navbar + global logic -->
+    <script src="./Script/script.js"></script>
+    <!-- Adopt page specific logic -->
+    <script src="./Script/adopt.js"></script>
+</body>
+</html>

@@ -141,7 +141,7 @@
                     <div class="pet-info">
                         <h3>Luna</h3>
                         <p>Calico Cat | 1 Year</p>
-                        <a href="#" class="btn-view">View Profile</a>
+                        <a href="adopt.html" class="btn-view">View Profile</a>
                     </div>
                 </div>
 
@@ -160,7 +160,7 @@
             </div>
             
             <div class="view-all">
-                <a href="#" class="btn-outline-dark">View All Adoptable Animals</a>
+                <a href="adopt.html" class="btn-outline-dark">View All Adoptable Animals</a>
             </div>
         </div>
     </section>
@@ -198,17 +198,27 @@
                 <div class="underline"></div>
             </div>
             
-            <div class="story-card">
-                <div class="story-image">
-                    <!-- Using a better aspect ratio image -->
-                    <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=800" alt="Happy Dog">
+            <div class="story-slider">
+                <button class="story-nav story-prev" aria-label="Previous story">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <div class="story-card">
+                    <div class="story-image">
+                        <!-- Default image; will be replaced by stories.js -->
+                        <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=800" alt="Happy pet story">
+                    </div>
+                    <div class="story-content">
+                        <i class="fas fa-quote-left quote-icon"></i>
+                        <h3>Nala's First Soft Bed</h3>
+                        <p>"Nala came to us scared and skinny. Thanks to Argos she now owns every couch cushion in the house and greets us with the happiest wiggle."</p>
+                        <span class="adopter">- The Samadhiya Family</span>
+                    </div>
                 </div>
-                <div class="story-content">
-                    <i class="fas fa-quote-left quote-icon"></i>
-                    <h3>Max's New Beginning</h3>
-                    <p>"Argos helped us find Max after he was rescued from the highway. The process was digital, fast, and transparent. Now he's the heart of our home!"</p>
-                    <span class="adopter">- The Miller Family</span>
-                </div>
+
+                <button class="story-nav story-next" aria-label="Next story">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -240,6 +250,7 @@
         </div>
     </footer>
 
+    <script src="./Script/stories.js"></script>
     <script src="./Script/script.js"></script>
 </body>
 </html>
