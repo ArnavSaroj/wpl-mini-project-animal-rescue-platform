@@ -1,0 +1,44 @@
+/* Centralized responsive rules for site */
+
+/* Tablet */
+@media screen and (max-width: 768px) {
+  /* Navigation */
+  .navigation { flex-wrap: wrap; gap: 8px; justify-content: flex-start; padding: 8px; }
+  .navContainer { overflow-x: auto; }
+  .navigation li { padding: 10px 12px; }
+
+  /* Container adjustments */
+  .container { padding: 0 12px; }
+
+  /* Forms */
+  .appForm { width: 90%; padding: 16px; }
+  .name { grid-template-columns: 120px 1fr; }
+  input[type="text"], input[type="email"], input[type="tel"], select { font-size: 0.95rem; }
+
+  /* Tables */
+  table { font-size: 0.9rem; width: 100%; }
+  th, td { padding: 8px; }
+
+  /* Media */
+  video, iframe { width: 100%; height: auto; }
+
+  /* Misc headings */
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.2rem; }
+}
+
+/* Mobile */
+@media screen and (max-width: 480px) {
+  .navigation { gap: 6px; }
+  .navigation li { padding: 8px 10px; font-size: 0.95rem; }
+
+  .appForm { width: 95%; gap: 16px; }
+  .name { grid-template-columns: 1fr; }
+  input[type="text"], input[type="email"], input[type="tel"], select { font-size: 1rem; }
+
+  table { font-size: 0.85rem; }
+  th, td { padding: 6px; }
+
+  h1 { font-size: 1.2rem; }
+  h2 { font-size: 1rem; }
+}

@@ -1,0 +1,228 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Form Submission Control - Hospital</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="responsive.css">
+        <link rel="stylesheet" href="submission-control.css">
+    </head>
+    <body>
+        <div class="navContainer">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home Page</a></li>
+                    <li><a href="about-department.html" target="_blank">Department Page</a></li>
+                    <li><a href="services.html" target="_blank">Services Page</a></li>
+                    <li><a href="doctors.html" target="_blank">Doctors Page</a></li>
+                    <li><a href="age-validation.html" target="_blank">Book Appointment</a></li>
+                    <li><a href="navigation.html" target="_blank">More Services</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="content-wrapper">
+            <div style="width: 100%; max-width: 650px;">
+                <div class="form-container">
+                    <h1>Submission Control</h1>
+                    <p class="subtitle">Test form submission with client-side validation</p>
+
+                    <form id="testForm">
+                        <div class="form-group">
+                            <label for="fullname">Full Name</label>
+                            <input type="text" id="fullname" placeholder="Enter full name" onblur="validateName()">
+                            <div class="error-message" id="nameError"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="testemail">Email Address</label>
+                            <input type="email" id="testemail" placeholder="Enter email" onblur="validateEmail()">
+                            <div class="error-message" id="emailError"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" placeholder="Enter age (18-100)" onblur="validateAge()">
+                            <div class="error-message" id="ageError"></div>
+                        </div>
+
+                        <div class="button-group">
+                            <button type="submit" class="btn-submit">Submit Form</button>
+                            <button type="reset" class="btn-reset" onclick="resetForm()">Clear</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="test-cases">
+                    <h3>Test Cases</h3>
+                    <div class="test-case invalid">
+                        <strong>Invalid:</strong> Name with numbers (e.g., "John123") - Should fail
+                    </div>
+                    <div class="test-case invalid">
+                        <strong>Invalid:</strong> Email without domain (e.g., "john@") - Should fail
+                    </div>
+                    <div class="test-case invalid">
+                        <strong>Invalid:</strong> Age below 18 or above 100 - Should fail
+                    </div>
+                    <div class="test-case valid">
+                        <strong>Valid:</strong> Name: "John Doe", Email: "john@example.com", Age: "28" - Should succeed
+                    </div>
+                    <div class="test-case valid">
+                        <strong>Valid:</strong> Name: "Jane Smith", Email: "jane.smith@hospital.com", Age: "35" - Should succeed
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="result-popup" id="resultPopup">
+            <div id="popupContent"></div>
+        </div>
+
+        <script>
+            const form = document.getElementById("testForm");
+
+            form.addEventListener("submit", function(event) {
+                event.preventDefault();
+                if (validateName() && validateEmail() && validateAge()) {
+                    submitForm();
+                } else {
+                    showError("Please correct all errors before submitting");
+                }
+            });
+
+            function validateName() {
+                const name = document.getElementById("fullname").value.trim();
+                const nameError = document.getElementById("nameError");
+                const nameInput = document.getElementById("fullname");
+
+                nameError.classList.remove("show");
+                nameInput.classList.remove("valid", "invalid");
+
+                if (name === "") {
+                    nameError.textContent = "Name is required";
+                    nameError.classList.add("show");
+                    nameInput.classList.add("invalid");
+                    return false;
+                }
+
+                if (/[0-9!@#$%^&*]/.test(name)) {
+                    nameError.textContent = "Name cannot contain numbers or special characters";
+                    nameError.classList.add("show");
+                    nameInput.classList.add("invalid");
+                    return false;
+                }
+
+                if (name.length < 3) {
+                    nameError.textContent = "Name must be at least 3 characters";
+                    nameError.classList.add("show");
+                    nameInput.classList.add("invalid");
+                    return false;
+                }
+
+                nameInput.classList.add("valid");
+                return true;
+            }
+
+            function validateEmail() {
+                const email = document.getElementById("testemail").value.trim();
+                const emailError = document.getElementById("emailError");
+                const emailInput = document.getElementById("testemail");
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                emailError.classList.remove("show");
+                emailInput.classList.remove("valid", "invalid");
+
+                if (email === "") {
+                    emailError.textContent = "Email is required";
+                    emailError.classList.add("show");
+                    emailInput.classList.add("invalid");
+                    return false;
+                }
+
+                if (!emailRegex.test(email)) {
+                    emailError.textContent = "Invalid email format";
+                    emailError.classList.add("show");
+                    emailInput.classList.add("invalid");
+                    return false;
+                }
+
+                emailInput.classList.add("valid");
+                return true;
+            }
+
+            function validateAge() {
+                const age = document.getElementById("age").value;
+                const ageError = document.getElementById("ageError");
+                const ageInput = document.getElementById("age");
+
+                ageError.classList.remove("show");
+                ageInput.classList.remove("valid", "invalid");
+
+                if (age === "") {
+                    ageError.textContent = "Age is required";
+                    ageError.classList.add("show");
+                    ageInput.classList.add("invalid");
+                    return false;
+                }
+
+                if (isNaN(age)) {
+                    ageError.textContent = "Age must be a number";
+                    ageError.classList.add("show");
+                    ageInput.classList.add("invalid");
+                    return false;
+                }
+
+                if (age < 18 || age > 100) {
+                    ageError.textContent = "Age must be between 18 and 100";
+                    ageError.classList.add("show");
+                    ageInput.classList.add("invalid");
+                    return false;
+                }
+
+                ageInput.classList.add("valid");
+                return true;
+            }
+
+            function submitForm() {
+                const name = document.getElementById("fullname").value;
+                const email = document.getElementById("testemail").value;
+                const age = document.getElementById("age").value;
+
+                showSuccess(`Form submitted successfully!<br>Name: ${name}<br>Email: ${email}<br>Age: ${age}`);
+                form.reset();
+                document.getElementById("fullname").classList.remove("valid", "invalid");
+                document.getElementById("testemail").classList.remove("valid", "invalid");
+                document.getElementById("age").classList.remove("valid", "invalid");
+            }
+
+            function resetForm() {
+                form.reset();
+                document.getElementById("nameError").classList.remove("show");
+                document.getElementById("emailError").classList.remove("show");
+                document.getElementById("ageError").classList.remove("show");
+                document.getElementById("fullname").classList.remove("valid", "invalid");
+                document.getElementById("testemail").classList.remove("valid", "invalid");
+                document.getElementById("age").classList.remove("valid", "invalid");
+            }
+
+            function showSuccess(message) {
+                const popup = document.getElementById("resultPopup");
+                popup.className = "result-popup show success";
+                popup.innerHTML = `<div id="popupContent"><strong style="color: #51cf66;">✓ Success</strong><br>${message}</div>`;
+                setTimeout(() => {
+                    popup.classList.remove("show");
+                }, 4000);
+            }
+
+            function showError(message) {
+                const popup = document.getElementById("resultPopup");
+                popup.className = "result-popup show error";
+                popup.innerHTML = `<div id="popupContent"><strong style="color: #ff6b6b;">✗ Error</strong><br>${message}</div>`;
+                setTimeout(() => {
+                    popup.classList.remove("show");
+                }, 4000);
+            }
+        </script>
+    </body>
+    </html>

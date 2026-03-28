@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More Services - Hospital</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        .navContainer {
+            background-color: #1a1a1a;
+            border-bottom: 2px solid white;
+            width: 100%;
+        }
+
+        .navContainer nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navContainer nav ul li {
+            color: white;
+            padding: 12px 16px;
+            display: inline-block;
+        }
+
+        .navContainer nav ul li:hover {
+            background-color: #333;
+            transition: 0.3s ease;
+        }
+
+        .navContainer nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .services-header {
+            text-align: center;
+            color: #00e5ff;
+            padding: 40px 20px 20px;
+        }
+
+        .services-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .services-header p {
+            color: #aaa;
+            font-size: 1.1rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            width: 95%;
+            max-width: 1300px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 25px;
+            border-radius: 8px;
+            border: 2px solid #00e5ff;
+            transition: all 0.3s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 280px;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 229, 255, 0.3);
+            border-color: #ffd54f;
+        }
+
+        .service-card h3 {
+            color: #00e5ff;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: #ccc;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .service-card a {
+            display: inline-block;
+            background: linear-gradient(135deg, #00e5ff 0%, #81d4fa 100%);
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s ease;
+            align-self: center;
+        }
+
+        .service-card a:hover {
+            background: linear-gradient(135deg, #ffd54f 0%, #ffeb3b 100%);
+        }
+
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 15px;
+            }
+
+            .services-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .service-card {
+                min-height: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .navContainer nav ul {
+                flex-direction: column;
+            }
+
+            .navContainer nav ul li {
+                padding: 10px 12px;
+                border-bottom: 1px solid #333;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navContainer">
+        <nav>
+            <ul class="navigation">
+                <li><a href="index.html">Home Page</a></li>
+                <li><a href="about-department.html" target="_blank">Department Page</a></li>
+                <li><a href="services.html" target="_blank">Services Page</a></li>
+                <li><a href="doctors.html" target="_blank">Doctors Page</a></li>
+                <li><a href="age-validation.html" target="_blank">Book Appointment</a></li>
+                <li><a href="navigation.html" target="_blank">More Services</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="services-header">
+        <h2>Additional Services</h2>
+        <p>Explore more features and services offered by Sun Hospital</p>
+    </div>
+
+    <div class="services-grid">
+                    <div class="service-card">
+                        <h3>Appointments</h3>
+                        <p>View and manage your daily appointments. Check your scheduled visits with our team of expert doctors.</p>
+                        <a href="appointments.html" target="_blank">View Appointments</a>
+                    </div>
+                    <div class="service-card">
+                        <h3>Hospital Map</h3>
+                        <p>Interactive hospital layout showing all departments, wards, and facilities. Find your way around easily.</p>
+                        <a href="map.html" target="_blank">View Map</a>
+                    </div>
+                    <div class="service-card">
+                        <h3>Emergency</h3>
+                        <p>Quick emergency severity assessment. Get priority levels for urgent medical situations and services.</p>
+                        <a href="emergency-level.html" target="_blank">Check Severity</a>
+                    </div>
+                    <div class="service-card">
+                        <h3>Appointment Status</h3>
+                        <p>Real-time status updates for your appointments. Check available slots and book your preferred time.</p>
+                        <a href="appointment-status.html" target="_blank">Check Status</a>
+                    </div>
+                    <div class="service-card">
+                        <h3>Billing</h3>
+                        <p>Manage your billing information and payment details. View charges by department and procedure.</p>
+                        <a href="billing.html" target="_blank">View Billing</a>
+                    </div>
+                    <div class="service-card">
+                        <h3>Form Validation</h3>
+                        <p>Validate patient information and medical records. Ensure all data is within acceptable ranges and formats.</p>
+                        <a href="range-validation.html" target="_blank">Validate Records</a>
+                    </div>
+                    <div class="service-card">
+                        <h3>Select Doctor</h3>
+                        <p>Browse and select doctors based on specialization and availability. Live selection with real-time updates.</p>
+                        <a href="live-selection.html" target="_blank">Select Doctor</a>
+                    </div>
+                    <div class="service-card">
+                        <h3>Media Gallery</h3>
+                        <p>Explore our hospital facilities and achievements through images and videos. Virtual tour of our premises.</p>
+                        <a href="media.html" target="_blank">View Gallery</a>
+                    </div>
+                    <div class="service-card">
+                        <h3>Real-Time Validation</h3>
+                        <p>Get instant feedback while entering data. Email, phone, and password strength validated in real-time as you type.</p>
+                        <a href="realtime-validation.html" target="_blank">Try Validation</a>
+                    </div>
+                    <div class="service-card">
+                        <h3>Appointment Booking</h3>
+                        <p>Book appointments with full validation. Select department, doctor, and date with automatic past-date prevention.</p>
+                        <a href="appointment-validation.html" target="_blank">Book Now</a>
+                    </div>
+                    <div class="service-card">
+                        <h3>Submission Control</h3>
+                        <p>Advanced form submission with client-side validation. Test valid and invalid data with detailed error handling.</p>
+                        <a href="submission-control.html" target="_blank">Test Form</a>
+                    </div>
+                    <div class="service-card">
+                        <h3>Reusable Functions</h3>
+                        <p>Contact form using modular validation functions. Email, phone, and name validation with reusable code patterns.</p>
+                        <a href="validation-functions.html" target="_blank">Contact Us</a>
+                    </div>
+                    <div class="service-card">
+                        <h3>Documented Validation</h3>
+                        <p>Complete validation system with comprehensive code documentation. Learn best practices and detailed comments.</p>
+                        <a href="validation-documentation.html" target="_blank">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

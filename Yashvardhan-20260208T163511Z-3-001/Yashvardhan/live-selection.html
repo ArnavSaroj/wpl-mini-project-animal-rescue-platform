@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live Department & Doctor Selection</title>
+
+    <link rel="stylesheet" href="responsive.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background-color: black;
+            color: white;
+        }
+
+        h2 {
+            color: #00e5ff;
+        }
+
+        select {
+            margin: 10px 0;
+            padding: 8px 12px;
+            font-size: 16px;
+            background-color: #1a1a1a;
+            color: white;
+            border: 1px solid #00e5ff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        select:hover {
+            background-color: #333;
+            transition: 0.3s ease;
+        }
+
+        .output {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #00e5ff;
+        }
+
+        /* responsive rules moved to responsive.css */
+    </style>
+</head>
+<body>
+
+    <h2>Select Department & Doctor</h2>
+
+    <label>Department:</label><br>
+    <select id="department" onchange="updateSelection()">
+        <option value="">-- Select Department --</option>
+        <option value="Cardiology">Cardiology</option>
+        <option value="Pediatrics">Pediatrics</option>
+        <option value="Radiology">Radiology</option>
+    </select>
+
+    <br>
+
+    <label>Doctor:</label><br>
+    <select id="doctor" onchange="updateSelection()">
+        <option value="">-- Select Doctor --</option>
+        <option value="Dr. AK Bala">Dr. AK Bala</option>
+        <option value="Dr. Amit Shah">Dr. Amit Shah</option>
+        <option value="Dr. Veer Singh">Dr. Veer Singh</option>
+    </select>
+
+    <div class="output" id="output">
+        Selected Department and Doctor will appear here
+    </div>
+
+    <script>
+        function updateSelection() {
+            const department = document.getElementById("department").value;
+            const doctor = document.getElementById("doctor").value;
+            const output = document.getElementById("output");
+
+            if (department === "" || doctor === "") {
+                output.textContent = "Please select both department and doctor.";
+                output.style.color = "red";
+            } else {
+                output.textContent = `Department: ${department} | Doctor: ${doctor}`;
+                output.style.color = "green";
+            }
+        }
+    </script>
+
+</body>
+</html>

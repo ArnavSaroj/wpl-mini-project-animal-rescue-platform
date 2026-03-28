@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motto</title>
+    <link rel="stylesheet" href="responsive.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            color: #00e5ff;
+            font-size: 2.5rem;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: #1a1a1a;
+            color: white;
+            border: 1px solid #00e5ff;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #333;
+            transition: 0.3s ease;
+        }
+        /* responsive rules moved to responsive.css */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="textContainer">
+            <h3 id="motto">A Hospital For All</h3>
+        </div>
+        <button onclick="changeMotto()">Click Me For Surprise!</button>
+    </div>
+    <script>
+        function changeMotto(){
+            document.getElementById("motto").innerHTML = "Something Changed"
+        }
+    </script>
+</body>
+</html>

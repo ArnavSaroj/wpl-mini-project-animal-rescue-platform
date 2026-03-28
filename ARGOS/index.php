@@ -1,3 +1,11 @@
+<?php 
+session_start();
+require_once './includes/db.php';
+
+// Fetch 3 latest pets
+$stmt = $pdo->query("SELECT * FROM pets ORDER BY id DESC LIMIT 3");
+$pets = $stmt->fetchAll();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,64 +18,83 @@
 </head>
 <body>
 
-    <nav class="navbar" id="navbar">
-        <div class="container">
-            <a href="index.html" class="logo">ARGOS<span class="dot">.</span></a>
-            
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#about">Our Story</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#adopt">Adopt</a></li>
-                <li><a href="#stats">Impact</a></li>
-                <li><a href="#stories">Stories</a></li>
+<nav class="navbar" id="navbar">
+    <div class="container">
+
+        <!-- FIXED LOGO LINK -->
+        <a href="index.php" class="logo">ARGOS<span class="dot">.</span></a>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about">Our Story</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="adopt.php">Adopt</a></li>
+            <li><a href="#stats">Impact</a></li>
+            <li><a href="#stories">Stories</a></li>
+
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <li><a href="dashboard.php">Dashboard</a></li>
+
+                <?php if ($_SESSION['role'] === 'admin'): ?>
+                    <li><a href="admin.php">Admin</a></li>
+                <?php endif; ?>
+
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <!-- USER LOGGED IN -->
+                <li><a href="logout.php" class="btn-nav-cta">Logout</a></li>
+            <?php else: ?>
+                <!-- NOT LOGGED IN -->
                 <li><a href="login.php" class="nav-login">Login</a></li>
                 <li><a href="register.php" class="btn-nav-cta">Join Argos</a></li>
-            </ul>
+            <?php endif; ?>
 
-            <div class="menu-icon" id="menuToggle">
-                <i class="fas fa-bars"></i>
-            </div>
+        </ul>
+
+        <div class="menu-icon" id="menuToggle">
+            <i class="fas fa-bars"></i>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <header class="hero">
-        <div class="hero-overlay">
-            <div class="container">
-                <h1>Waiting for a hero.</h1>
-                <p>Inspired by the loyalty of Argos, we connect stray animals with the help they need and the homes they deserve.</p>
-                <div class="hero-btns">
-                    <a href="#report" class="btn-emergency">Report a Rescue</a>
-                    <a href="#adopt" class="btn-outline">Browse Animals</a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <section class="services" id="services">
+<header class="hero">
+    <div class="hero-overlay">
         <div class="container">
-            <div class="section-header">
-                <h2>Our Mission</h2>
-                <div class="underline"></div>
-            </div>
-            <div class="service-grid">
-                <div class="service-card">
-                    <div class="icon-box red"><i class="fas fa-ambulance"></i></div>
-                    <h3>Rescue Reporting</h3>
-                    <p>Found an injured animal? Use our digital system to pin the location and alert our team immediately.</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon-box blue"><i class="fas fa-home"></i></div>
-                    <h3>Smart Adoption</h3>
-                    <p>Browse through profiles of vaccinated and rescued animals looking for their forever homes.</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon-box orange"><i class="fa-solid fa-dog"></i></div>
-                    <h3>Loyalty & Care</h3>
-                    <p>We ensure every rescue case is tracked from the moment of reporting until successful rehabilitation.</p>
-                </div>
+            <h1>Waiting for a hero.</h1>
+            <p>Inspired by the loyalty of Argos, we connect stray animals with the help they need and the homes they deserve.</p>
+            <div class="hero-btns">
+                <a href="report.php" class="btn-emergency">Report a Rescue</a>
+                <a href="adopt.php" class="btn-outline">Browse Animals</a>
             </div>
         </div>
-    </section>
+    </div>
+</header>
+
+<section class="services" id="services">
+    <div class="container">
+        <div class="section-header">
+            <h2>Our Mission</h2>
+            <div class="underline"></div>
+        </div>
+        <div class="service-grid">
+            <div class="service-card">
+                <div class="icon-box red"><i class="fas fa-ambulance"></i></div>
+                <h3>Rescue Reporting</h3>
+                <p>Found an injured animal? Use our digital system to pin the location and alert our team immediately.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon-box blue"><i class="fas fa-home"></i></div>
+                <h3>Smart Adoption</h3>
+                <p>Browse through profiles of vaccinated and rescued animals looking for their forever homes.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon-box orange"><i class="fa-solid fa-dog"></i></div>
+                <h3>Loyalty & Care</h3>
+                <p>We ensure every rescue case is tracked from the moment of reporting until successful rehabilitation.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
     <section class="myth-section" id="about">
         <div class="container">
@@ -119,48 +146,43 @@
             </div>
 
             <div class="pet-grid">
-                <!-- Pet Card 1 -->
-                <div class="pet-card">
-                    <div class="pet-image">
-                        <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=500" alt="Dog">
-                        <span class="badge new">New Rescue</span>
-                    </div>
-                    <div class="pet-info">
-                        <h3>Buddy</h3>
-                        <p>Beagle | 2 Years</p>
-                        <a href="#" class="btn-view">View Profile</a>
-                    </div>
-                </div>
 
-                <!-- Pet Card 2 -->
-                <div class="pet-card">
-                    <div class="pet-image">
-                        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=500" alt="Cat">
-                        <span class="badge healthy">Healthy</span>
-                    </div>
-                    <div class="pet-info">
-                        <h3>Luna</h3>
-                        <p>Calico Cat | 1 Year</p>
-                        <a href="adopt.html" class="btn-view">View Profile</a>
-                    </div>
-                </div>
+            <?php if ($pets): ?>
+                <?php foreach ($pets as $pet): ?>
+                    <div class="pet-card">
 
-                <!-- Pet Card 3 -->
-                <div class="pet-card">
-                    <div class="pet-image">
-                        <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500" alt="Dog">
-                        <span class="badge special">Special Care</span>
+                        <div class="pet-image">
+                            <img src="<?= htmlspecialchars($pet['image']) ?>" alt="Pet">
+
+                            <?php if ($pet['status'] === 'adopted'): ?>
+                                <span class="badge special">Adopted</span>
+                            <?php endif; ?>
+                        </div>
+
+                        <div class="pet-info">
+                            <h3><?= htmlspecialchars($pet['name']) ?></h3>
+
+                            <p>
+                                <?= htmlspecialchars($pet['type']) ?> |
+                                <?= $pet['age'] ?> Years
+                            </p>
+
+                            <a href="pet.php?id=<?= $pet['id'] ?>" class="btn-view">
+                                View Profile
+                            </a>
+                        </div>
+
                     </div>
-                    <div class="pet-info">
-                        <h3>Max</h3>
-                        <p>Bull Dog | 5 Years</p>
-                        <a href="#" class="btn-view">View Profile</a>
-                    </div>
-                </div>
+                <?php endforeach; ?>
+
+            <?php else: ?>
+                <p style="text-align:center;">No pets available right now 🐾</p>
+            <?php endif; ?>
+
             </div>
             
             <div class="view-all">
-                <a href="adopt.html" class="btn-outline-dark">View All Adoptable Animals</a>
+                <a href="adopt.php" class="btn-outline-dark">View All Adoptable Animals</a>
             </div>
         </div>
     </section>
@@ -242,15 +264,13 @@
     <footer>
         <div class="container">
             <p>&copy; 2026 ARGOS Animal Rescue Platform. Compassion via Technology.</p>
-            <div class="social-links">
-                <a href="#"><i class="fa-brands fa-facebook" style="color: rgb(31, 120, 242);"></i></a>
-                <a href="#"><i class="fa-brands fa-instagram" style="color: rgb(177, 151, 252);"></i></a>
-                <a href="#"><i class="fa-brands fa-twitter" style="color: rgb(116, 192, 252);"></i></a>
-            </div>
         </div>
     </footer>
 
     <script src="./Script/stories.js"></script>
     <script src="./Script/script.js"></script>
+
 </body>
 </html>
+
+    

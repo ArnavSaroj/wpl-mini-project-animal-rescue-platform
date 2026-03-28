@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation Functions - Hospital</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="validation-functions.css">
+</head>
+<body>
+    <div class="navContainer">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home Page</a></li>
+                <li><a href="about-department.html" target="_blank">Department Page</a></li>
+                <li><a href="services.html" target="_blank">Services Page</a></li>
+                <li><a href="doctors.html" target="_blank">Doctors Page</a></li>
+                <li><a href="age-validation.html" target="_blank">Book Appointment</a></li>
+                <li><a href="navigation.html" target="_blank">More Services</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="form-container">
+            <h1>Contact Us</h1>
+            <p class="subtitle">Using reusable validation functions</p>
+
+            <form id="contactForm" onsubmit="return submitContact()">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Your full name" oninput="validateNameInput()">
+                    <div class="validation-message" id="nameMsg"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="your@hospital.com" oninput="validateEmailInput()">
+                    <div class="validation-message" id="emailMsg"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="+91 98765 43210" oninput="validatePhoneInput()">
+                    <div class="validation-message" id="phoneMsg"></div>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn-submit" id="submitBtn" disabled>Send Message</button>
+                    <button type="reset" class="btn-reset" onclick="resetForm()">Clear</button>
+                </div>
+            </form>
+
+            <div class="info-section">
+                <strong>About This Form:</strong> This page demonstrates modular validation using separate functions for email, phone, and name validation. Each function handles its own validation logic and is called from a main validation routine, making the code reusable and maintainable.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const submitBtn = document.getElementById("submitBtn");
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function isValidPhone(phone) {
+            const phoneRegex = /^(\+91[\-\s]?)?[6-9][0-9]{9}$/;
+            return phoneRegex.test(phone);
+        }
+
+        function isValidName(name) {
+            return name.trim().length >= 3 && !/[0-9!@#$%^&*]/.test(name);
+        }
+
+        function validateEmailInput() {
+            const email = document.getElementById("email").value;
+            const emailMsg = document.getElementById("emailMsg");
+            const emailInput = document.getElementById("email");
+
+            if (email === "") {
+                emailMsg.className = "validation-message";
+                emailInput.classList.remove("valid", "invalid");
+                checkFormValidity();
+                return false;
+            }
+
+            if (isValidEmail(email)) {
+                emailMsg.textContent = "✓ Valid email";
+                emailMsg.className = "validation-message success";
+                emailInput.classList.add("valid");
+                emailInput.classList.remove("invalid");
+                checkFormValidity();
+                return true;
+            } else {
+                emailMsg.textContent = "✗ Invalid email format";
+                emailMsg.className = "validation-message error";
+                emailInput.classList.add("invalid");
+                emailInput.classList.remove("valid");
+                checkFormValidity();
+                return false;
+            }
+        }
+
+        function validatePhoneInput() {
+            const phone = document.getElementById("phone").value;
+            const phoneMsg = document.getElementById("phoneMsg");
+            const phoneInput = document.getElementById("phone");
+
+            if (phone === "") {
+                phoneMsg.className = "validation-message";
+                phoneInput.classList.remove("valid", "invalid");
+                checkFormValidity();
+                return false;
+            }
+
+            if (isValidPhone(phone)) {
+                phoneMsg.textContent = "✓ Valid phone number";
+                phoneMsg.className = "validation-message success";
+                phoneInput.classList.add("valid");
+                phoneInput.classList.remove("invalid");
+                checkFormValidity();
+                return true;
+            } else {
+                phoneMsg.textContent = "✗ Enter valid 10-digit Indian phone number";
+                phoneMsg.className = "validation-message error";
+                phoneInput.classList.add("invalid");
+                phoneInput.classList.remove("valid");
+                checkFormValidity();
+                return false;
+            }
+        }
+
+        function validateNameInput() {
+            const name = document.getElementById("name").value;
+            const nameMsg = document.getElementById("nameMsg");
+            const nameInput = document.getElementById("name");
+
+            if (name === "") {
+                nameMsg.className = "validation-message";
+                nameInput.classList.remove("valid", "invalid");
+                checkFormValidity();
+                return false;
+            }
+
+            if (isValidName(name)) {
+                nameMsg.textContent = "✓ Valid name";
+                nameMsg.className = "validation-message success";
+                nameInput.classList.add("valid");
+                nameInput.classList.remove("invalid");
+                checkFormValidity();
+                return true;
+            } else {
+                nameMsg.textContent = "✗ Name must be at least 3 characters with no numbers";
+                nameMsg.className = "validation-message error";
+                nameInput.classList.add("invalid");
+                nameInput.classList.remove("valid");
+                checkFormValidity();
+                return false;
+            }
+        }
+
+        function checkFormValidity() {
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+
+            const isNameValid = isValidName(name);
+            const isEmailValid = isValidEmail(email);
+            const isPhoneValid = isValidPhone(phone);
+
+            submitBtn.disabled = !(isNameValid && isEmailValid && isPhoneValid);
+        }
+
+        function submitContact() {
+            if (validateNameInput() && validateEmailInput() && validatePhoneInput()) {
+                const name = document.getElementById("name").value;
+                const email = document.getElementById("email").value;
+                const phone = document.getElementById("phone").value;
+                alert(`Message sent successfully!\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nThank you for contacting us.`);
+                location.reload();
+                return false;
+            }
+            return false;
+        }
+
+        function resetForm() {
+            document.getElementById("contactForm").reset();
+            document.getElementById("name").classList.remove("valid", "invalid");
+            document.getElementById("email").classList.remove("valid", "invalid");
+            document.getElementById("phone").classList.remove("valid", "invalid");
+            document.getElementById("nameMsg").className = "validation-message";
+            document.getElementById("emailMsg").className = "validation-message";
+            document.getElementById("phoneMsg").className = "validation-message";
+            submitBtn.disabled = true;
+        }
+
+        submitBtn.disabled = true;
+    </script>
+</body>
+</html>

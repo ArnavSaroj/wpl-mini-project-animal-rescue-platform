@@ -1,0 +1,97 @@
+    .admin-container {
+        padding: 120px 20px;
+        max-width: 1000px;
+        margin: auto;
+    }
+
+    .report-card {
+        background: white;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    .report-card img {
+        width: 100%;
+        max-height: 300px;
+        object-fit: cover;
+        margin-top: 10px;
+        border-radius: 10px;
+    }
+
+    .status {
+        font-weight: bold;
+    }
+
+/* ADMIN ADD PET SECTION */
+.admin-add-pet {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    margin-bottom: 40px;
+}
+
+.admin-add-pet h2 {
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 20px;
+}
+
+/* FORM LAYOUT */
+.add-pet-form .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+/* INPUTS */
+.add-pet-form input,
+.add-pet-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+/* TEXTAREA */
+.add-pet-form textarea {
+    min-height: 100px;
+    margin-bottom: 15px;
+}
+
+/* FOCUS EFFECT */
+.add-pet-form input:focus,
+.add-pet-form textarea:focus {
+    border-color: #ff7a18;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255,122,24,0.15);
+}
+
+/* BUTTON */
+.add-pet-form .btn-main {
+    background: linear-gradient(135deg, #ff7a18, #ff4d4d);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* BUTTON HOVER */
+.add-pet-form .btn-main:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    .add-pet-form .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
