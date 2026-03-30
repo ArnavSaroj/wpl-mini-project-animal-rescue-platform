@@ -18,83 +18,83 @@ $pets = $stmt->fetchAll();
 </head>
 <body>
 
-<nav class="navbar" id="navbar">
-    <div class="container">
+    <nav class="navbar" id="navbar">
+        <div class="container">
 
-        <!-- FIXED LOGO LINK -->
-        <a href="index.php" class="logo">ARGOS<span class="dot">.</span></a>
+            <!-- FIXED LOGO LINK -->
+            <a href="index.php" class="logo">ARGOS<span class="dot">.</span></a>
 
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#about">Our Story</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="adopt.php">Adopt</a></li>
-            <li><a href="#stats">Impact</a></li>
-            <li><a href="#stories">Stories</a></li>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">Our Story</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="adopt.php">Adopt</a></li>
+                <li><a href="#stats">Impact</a></li>
+                <li><a href="#stories">Stories</a></li>
 
-            <?php if (isset($_SESSION['user_id'])): ?>
-                <li><a href="dashboard.php">Dashboard</a></li>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <li><a href="dashboard.php">Dashboard</a></li>
 
-                <?php if ($_SESSION['role'] === 'admin'): ?>
-                    <li><a href="admin.php">Admin</a></li>
+                    <?php if ($_SESSION['role'] === 'admin'): ?>
+                        <li><a href="admin.php">Admin</a></li>
+                    <?php endif; ?>
+
                 <?php endif; ?>
 
-            <?php endif; ?>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <!-- USER LOGGED IN -->
+                    <li><a href="logout.php" class="btn-nav-cta">Logout</a></li>
+                <?php else: ?>
+                    <!-- NOT LOGGED IN -->
+                    <li><a href="login.php" class="nav-login">Login</a></li>
+                    <li><a href="register.php" class="btn-nav-cta">Join Argos</a></li>
+                <?php endif; ?>
 
-            <?php if (isset($_SESSION['user_id'])): ?>
-                <!-- USER LOGGED IN -->
-                <li><a href="logout.php" class="btn-nav-cta">Logout</a></li>
-            <?php else: ?>
-                <!-- NOT LOGGED IN -->
-                <li><a href="login.php" class="nav-login">Login</a></li>
-                <li><a href="register.php" class="btn-nav-cta">Join Argos</a></li>
-            <?php endif; ?>
+            </ul>
 
-        </ul>
-
-        <div class="menu-icon" id="menuToggle">
-            <i class="fas fa-bars"></i>
+            <div class="menu-icon" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-<header class="hero">
-    <div class="hero-overlay">
+    <header class="hero">
+        <div class="hero-overlay">
+            <div class="container">
+                <h1>Waiting for a hero.</h1>
+                <p>Inspired by the loyalty of Argos, we connect stray animals with the help they need and the homes they deserve.</p>
+                <div class="hero-btns">
+                    <a href="report.php" class="btn-emergency">Report a Rescue</a>
+                    <a href="adopt.php" class="btn-outline">Browse Animals</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="services" id="services">
         <div class="container">
-            <h1>Waiting for a hero.</h1>
-            <p>Inspired by the loyalty of Argos, we connect stray animals with the help they need and the homes they deserve.</p>
-            <div class="hero-btns">
-                <a href="report.php" class="btn-emergency">Report a Rescue</a>
-                <a href="adopt.php" class="btn-outline">Browse Animals</a>
+            <div class="section-header">
+                <h2>Our Mission</h2>
+                <div class="underline"></div>
+            </div>
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="icon-box red"><i class="fas fa-ambulance"></i></div>
+                    <h3>Rescue Reporting</h3>
+                    <p>Found an injured animal? Use our digital system to pin the location and alert our team immediately.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon-box blue"><i class="fas fa-home"></i></div>
+                    <h3>Smart Adoption</h3>
+                    <p>Browse through profiles of vaccinated and rescued animals looking for their forever homes.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon-box orange"><i class="fa-solid fa-dog"></i></div>
+                    <h3>Loyalty & Care</h3>
+                    <p>We ensure every rescue case is tracked from the moment of reporting until successful rehabilitation.</p>
+                </div>
             </div>
         </div>
-    </div>
-</header>
-
-<section class="services" id="services">
-    <div class="container">
-        <div class="section-header">
-            <h2>Our Mission</h2>
-            <div class="underline"></div>
-        </div>
-        <div class="service-grid">
-            <div class="service-card">
-                <div class="icon-box red"><i class="fas fa-ambulance"></i></div>
-                <h3>Rescue Reporting</h3>
-                <p>Found an injured animal? Use our digital system to pin the location and alert our team immediately.</p>
-            </div>
-            <div class="service-card">
-                <div class="icon-box blue"><i class="fas fa-home"></i></div>
-                <h3>Smart Adoption</h3>
-                <p>Browse through profiles of vaccinated and rescued animals looking for their forever homes.</p>
-            </div>
-            <div class="service-card">
-                <div class="icon-box orange"><i class="fa-solid fa-dog"></i></div>
-                <h3>Loyalty & Care</h3>
-                <p>We ensure every rescue case is tracked from the moment of reporting until successful rehabilitation.</p>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
 
     <section class="myth-section" id="about">
         <div class="container">
@@ -112,7 +112,7 @@ $pets = $stmt->fetchAll();
     </section>
 
     <!-- Progress Section -->
-        <section class="prog-section" id="">
+    <section class="prog-section" id="">
         <div class="container">
             <h1 class="prog-text">How it works.</h1>
             <div class="prog-content">
