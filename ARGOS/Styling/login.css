@@ -1,0 +1,184 @@
+/* ===============================
+   LOGIN PAGE WRAPPER
+================================= */
+.login-wrapper {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--light);
+}
+
+/* ===============================
+   MAIN CARD CONTAINER
+================================= */
+.login-container {
+    display: flex;
+    width: 80%;
+    height: 80vh;
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+
+/* ===============================
+   LEFT SIDE (ANIMAL)
+================================= */
+.login-left {
+    flex: 1;
+    background: url('https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=1200') center/cover no-repeat;
+    position: relative;
+}
+
+.login-left::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+}
+
+/* TEXT OVER IMAGE */
+.login-text {
+    position: absolute;
+    color: white;
+    z-index: 2;
+    bottom: 40px;
+    left: 40px;
+    max-width: 300px;
+}
+
+.login-text h2 {
+    font-size: 2.2rem;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.2;
+}
+
+.login-text p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* ===============================
+   RIGHT SIDE (FORM)
+================================= */
+.login-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--white);
+}
+
+/* FORM BOX */
+.login-box {
+    width: 340px;
+}
+
+/* ===============================
+   LOGO
+================================= */
+.login-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 10px;
+    color: var(--dark);
+    letter-spacing: 2px;
+}
+
+.login-logo .dot {
+    color: var(--primary);
+}
+
+/* ===============================
+   TEXT
+================================= */
+.login-box h2 {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.login-subtext {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 25px;
+}
+
+/* ===============================
+   INPUTS
+================================= */
+.login-box input {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    transition: 0.2s;
+    font-size: 0.95rem;
+}
+
+.login-box input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.15);
+}
+
+/* ===============================
+   BUTTON
+================================= */
+.login-box button {
+    width: 100%;
+    padding: 13px;
+    border-radius: 50px;
+    border: none;
+    background: var(--primary);
+    color: white;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-box button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(230, 126, 34, 0.3);
+    background: #d35400;
+}
+
+/* ===============================
+   ERRORS
+================================= */
+.errors {
+    color: var(--emergency);
+    margin-bottom: 10px;
+    list-style: none;
+    padding-left: 0;
+    font-size: 0.9rem;
+}
+
+/* ===============================
+   RESPONSIVE
+================================= */
+@media (max-width: 1024px) {
+    .login-container {
+        width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .login-left {
+        height: 220px;
+    }
+
+    .login-box {
+        padding: 30px 20px;
+    }
+}
