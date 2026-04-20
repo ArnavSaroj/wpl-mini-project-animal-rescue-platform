@@ -95,3 +95,70 @@
         grid-template-columns: 1fr;
     }
 }
+
+.report-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.report-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status.pending {
+    background: #ffeaa7;
+    color: #d35400;
+}
+
+.status.in_progress {
+    background: #74b9ff;
+    color: white;
+}
+
+.status.resolved {
+    background: #55efc4;
+    color: #00695c;
+}
+
+.report-info {
+    margin: 10px 0;
+    color: #555;
+}
+
+.map-link {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: #6c5ce7;
+    text-decoration: none;
+}
+
+.status-form {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-update {
+    background: #ff7a00;
+    border: none;
+    padding: 6px 12px;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}

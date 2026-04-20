@@ -2,98 +2,119 @@
 session_start();
 require_once './includes/db.php';
 
-$success = '';
-$errors = [];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $title = $_POST['title'] ?? '';
+    $desc = $_POST['description'] ?? '';
+    $lat = $_POST['latitude'] ?? null;
+    $lng = $_POST['longitude'] ?? null;
+    $location = $_POST['location'] ?? '';
+    $contact = $_POST['contact'] ?? '';
+    $report_type = $_POST['report_type'] ?? '';
 
-    $description = trim($_POST['description']);
-    $location = trim($_POST['location']);
-    $contact = trim($_POST['contact']);
-    $user_id = $_SESSION['user_id'] ?? null;
-
-    // ✅ FIX: define lat/lng safely
-    $lat = !empty($_POST['latitude']) ? $_POST['latitude'] : null;
-    $lng = !empty($_POST['longitude']) ? $_POST['longitude'] : null;
-
-    $imagePath = null;
-
-    // Image upload
-    if (!empty($_FILES['image']['name'])) {
-        $targetDir = "uploads/";
-
-        if (!is_dir($targetDir)) {
-            mkdir($targetDir);
-        }
-
-        $filename = time() . "_" . basename($_FILES["image"]["name"]);
-        $targetFile = $targetDir . $filename;
-
-        if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
-            $imagePath = $targetFile;
-        }
-    }
-
-    // Insert into DB
     $stmt = $pdo->prepare("
-        INSERT INTO reports (user_id, description, location, contact, image, latitude, longitude)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO reports 
+        (title, description, location, contact, report_type, latitude, longitude, status)
+        VALUES (?, ?, ?, ?, ?, ?, ?, 'pending')
     ");
 
     $stmt->execute([
-        $user_id,
-        $description,
+        $title,
+        $desc,
         $location,
         $contact,
-        $imagePath,
+        $report_type,
         $lat,
         $lng
     ]);
 
-    $success = "Report submitted successfully 🚑";
+    echo "<script>alert('Report submitted successfully!'); window.location='report.php';</script>";
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Report Rescue | ARGOS</title>
+    <title>Report Pet | ARGOS</title>
 
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+    <!-- Your existing styles -->
     <link rel="stylesheet" href="./Styling/style.css">
 
     <style>
-        .report-container {
-            padding: 120px 0;
-            max-width: 600px;
-            margin: auto;
-        }
+body {
+    background: #f5f6fa;
+    font-family: Arial, sans-serif;
+}
 
-        .report-box {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
+.report-container {
+    max-width: 900px;   /* wider */
+    margin: 100px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
 
-        .report-box textarea,
-        .report-box input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-        }
+.report-container h2 {
+    
+    margin-bottom: 20px;
+    font-size: 24px;
+}
 
-        .success {
-            color: green;
-            margin-bottom: 10px;
-        }
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
 
-        .errors {
-            color: red;
-            margin-bottom: 10px;
-        }
+input, textarea, select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+textarea {
+    height: 100px;
+    resize: none;
+}
+
+#map {
+    height: 400px;   /* FIXED */
+    width: 100%;
+    margin-top: 15px;
+    border-radius: 12px;
+}
+
+.coords {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+.btn-submit {
+    margin-top: 20px;
+    background: #ff7a00;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.btn-submit:hover {
+    background: #e66d00;
+}
     </style>
 </head>
 
@@ -105,43 +126,74 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </nav>
 
-<section class="report-container">
-    <div class="report-box">
+<div class="report-container">
 
-        <h2>Report an Animal in Need 🚑</h2>
+    <h2 style="text-align:left; margin-top: 10px;">Report a Pet 🐾</h2>
 
-        <?php if ($success): ?>
-            <p class="success"><?= $success ?></p>
-        <?php endif; ?>
+    <form method="POST">
 
-        <?php if ($errors): ?>
-            <ul class="errors">
-                <?php foreach ($errors as $e): ?>
-                    <li><?= htmlspecialchars($e) ?></li>
-                <?php endforeach; ?>
-            </ul>
-        <?php endif; ?>
+        <input type="text" name="title" placeholder="Title" required>
 
-        <form method="post" enctype="multipart/form-data">
+        <textarea name="description" placeholder="Describe the situation..." required></textarea>
 
-            <textarea name="description" placeholder="Describe the situation..." required></textarea>
+        <input type="text" name="location" placeholder="Location (e.g. XYZ Colony)" required>
 
-            <input type="text" name="location" placeholder="Location (area, landmark)">
+        <input type="text" name="contact" placeholder="Your Contact Number" required>
 
-            <input type="text" name="contact" placeholder="Your contact number">
+        <select name="report_type" required>
+            <option value="">Select Report Type</option>
+            <option value="lost">Lost Pet</option>
+            <option value="found">Injured Animal</option>
+            <option value="found">Found Animal</option>
+        </select>
 
-            <!-- IMAGE -->
-            <input type="file" name="image">
+        <!-- Hidden -->
+        <input type="hidden" name="latitude" id="lat">
+        <input type="hidden" name="longitude" id="lng">
 
-            <!-- LOCATION -->
-            <input type="text" name="latitude" placeholder="Latitude (optional)">
-            <input type="text" name="longitude" placeholder="Longitude (optional)">
+        <div id="map"></div>
 
-            <button class="btn-main">Submit Report</button>
-        </form>
+        <p class="coords" id="coords">Click on map to select location</p>
 
-    </div>
-</section>
+        <button class="btn-submit">Submit Report</button>
+
+    </form>
+
+</div>
+
+<!-- Leaflet -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+let map = L.map('map').setView([19.0760, 72.8777], 12);
+let marker;
+
+// Load map
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap'
+}).addTo(map);
+
+// Fix rendering issue
+setTimeout(() => {
+    map.invalidateSize();
+}, 100);
+
+// Click to select location
+map.on('click', function(e) {
+
+    if (marker) {
+        map.removeLayer(marker);
+    }
+
+    marker = L.marker(e.latlng).addTo(map);
+
+    document.getElementById('lat').value = e.latlng.lat;
+    document.getElementById('lng').value = e.latlng.lng;
+
+    document.getElementById('coords').innerText =
+        "Selected: " + e.latlng.lat.toFixed(5) + ", " + e.latlng.lng.toFixed(5);
+});
+</script>
 
 </body>
 </html>
